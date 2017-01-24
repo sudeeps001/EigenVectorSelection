@@ -14,17 +14,19 @@ Tao Xiang and Shaogang Gong (2008). Spectral clustering with eigenvector selecti
 [Article DOI: 10.1016/j.patcog.2007.07.023](http://dx.doi.org/10.1016/j.patcog.2007.07.023)  
 [Pdf link](http://www.eecs.qmul.ac.uk/~sgg/papers/XiangGong-PR08.pdf)  
 
+See the original manuscript or open the html file for equations
+
 ##**compute.params**
 
 ##### Description
 Compute posterior probability for the gaussian mixture model. Given an eigen vector, compute the posterior probabilities that the given vector is a gaussian mixture under the given parameters. The variable names in this function follows the pattern adopted by Xiang and Gong (2008) in their manuscript.   
-This function solves the following equations from the paper (Expectation part):
+<!---This function solves the following equations from the paper (Expectation part):
 
 $h^{1}_{kn}=\frac{(1-R_{ek})\, \mathscr{N}(e_{kn}|\mu_{k1},\, \sigma_{k1})}{(1-R_{ek})\, \mathscr{N}(e_{kn}|\mu_{k1},\, \sigma_{k1})+\, \mathit{w}_{k}\, R_{ek}\, \mathscr{N}(e_{kn}|\mu_{k2},\, \sigma_{k2})+\, (1-\mathit{w}_{k})\, R_{ek}\, \mathscr{N}(e_{kn}|\mu_{k1},\, \sigma_{k1})}$
 
 $h^{2}_{kn}=\frac{\mathit{w}_{k}\, R_{ek}\, \mathscr{N}(e_{kn}|\mu_{k2},\, \sigma_{k2})}{(1-R_{ek})\, \mathscr{N}(e_{kn}|\mu_{k1},\, \sigma_{k1})+\, \mathit{w}_{k}\, R_{ek}\, \mathscr{N}(e_{kn}|\mu_{k2},\, \sigma_{k2})+\, (1-\mathit{w}_{k})\, R_{ek}\, \mathscr{N}(e_{kn}|\mu_{k1},\, \sigma_{k1})}$
 
-$h^{3}_{kn}=\frac{(1-\mathit{w}_{k})\, R_{ek}\, \mathscr{N}(e_{kn}|\mu_{k3},\, \sigma_{k3})}{(1-R_{ek})\, \mathscr{N}(e_{kn}|\mu_{k1},\, \sigma_{k1})+\, \mathit{w}_{k}\, R_{ek}\, \mathscr{N}(e_{kn}|\mu_{k2},\, \sigma_{k2})+\, (1-\mathit{w}_{k})\, R_{ek}\, \mathscr{N}(e_{kn}|\mu_{k1},\, \sigma_{k1})}$
+$h^{3}_{kn}=\frac{(1-\mathit{w}_{k})\, R_{ek}\, \mathscr{N}(e_{kn}|\mu_{k3},\, \sigma_{k3})}{(1-R_{ek})\, \mathscr{N}(e_{kn}|\mu_{k1},\, \sigma_{k1})+\, \mathit{w}_{k}\, R_{ek}\, \mathscr{N}(e_{kn}|\mu_{k2},\, \sigma_{k2})+\, (1-\mathit{w}_{k})\, R_{ek}\, \mathscr{N}(e_{kn}|\mu_{k1},\, \sigma_{k1})}$ 
 
 The maximization part updates the parameters as:
 
@@ -38,7 +40,7 @@ $\sigma_{k2}^{new}=\frac{\sum_{n=1}^{N}h_{kn}^{2}(e_{kn}-\mu_{kn}^{2})^{2}}{\sum
 
 $\mu_{k3}^{new}=\frac{\sum_{n=1}^{N}h_{kn}^{3}e_{kn}}{\sum_{n=1}^{N}h_{kn}^{3}}$
 
-$\sigma_{k3}^{new}=\frac{\sum_{n=1}^{N}h_{kn}^{3}(e_{kn}-\mu_{kn}^{3})^{2}}{\sum_{n=1}^{N}h_{kn}^{3}}$
+$\sigma_{k3}^{new}=\frac{\sum_{n=1}^{N}h_{kn}^{3}(e_{kn}-\mu_{kn}^{3})^{2}}{\sum_{n=1}^{N}h_{kn}^{3}}$ --->
 
 ##### Parameters
 * vec: input eigen vector $e_{kn}$
@@ -107,8 +109,8 @@ The relevant eigenvectors with rnk > 0.50 can be used for further downstream pro
 ##### Return
 A list of values:
 
-* rnk: a vector of n $R_{ek}^{new}$ values, where `n==maxtrials`
-* problist: a list of mixture probabilities, calculated as $p(e_{kn}|\theta_{ekn}^{2})\,=\,\mathit{w}_{k}\, \mathscr{N} (e_{kn}|\mu_{k2},\, \sigma_{k2})\, +\, (1-\mathit{w}_{k})\, \mathscr{N}(e_{kn}|\mu_{k3},\, \sigma_{k3})$
+<!---* rnk: a vector of n $R_{ek}^{new}$ values, where `n==maxtrials`
+* problist: a list of mixture probabilities, calculated as $p(e_{kn}|\theta_{ekn}^{2})\,=\,\mathit{w}_{k}\, \mathscr{N} (e_{kn}|\mu_{k2},\, \sigma_{k2})\, +\, (1-\mathit{w}_{k})\, \mathscr{N}(e_{kn}|\mu_{k3},\, \sigma_{k3})$ -->
 
 ## **wrapper.compute.relevance**
 
@@ -134,5 +136,5 @@ testrel
 
 ##### Return
 
-A vector, with same length as `ncol(mat)` and each value is the relevance value that maximizes the log likelihood function $ln\, p(e_{kn}|\theta_{ekn}^{2})\,=\, ln\, \sum_{i=1}^{N}\mathit{w}_{k}\, \mathscr{N} (e_{ki}|\mu_{k2},\, \sigma_{k2})\, +\, (1-\mathit{w}_{k})\, \mathscr{N}(e_{ki}|\mu_{k3},\, \sigma_{k3})$ after `maxtrial` repeats
+<!--- A vector, with same length as `ncol(mat)` and each value is the relevance value that maximizes the log likelihood function $ln\, p(e_{kn}|\theta_{ekn}^{2})\,=\, ln\, \sum_{i=1}^{N}\mathit{w}_{k}\, \mathscr{N} (e_{ki}|\mu_{k2},\, \sigma_{k2})\, +\, (1-\mathit{w}_{k})\, \mathscr{N}(e_{ki}|\mu_{k3},\, \sigma_{k3})$ after `maxtrial` repeats --->
 
